@@ -1,0 +1,47 @@
+From 8dc21ce42d24493d911caae6d3388185fc4c303c Mon Sep 17 00:00:00 2001
+From: Jackson Wang <jackson.wang@wpi-group.com>
+Date: Wed, 3 May 2023 10:48:30 +0800
+Subject: [PATCH] WPI: OP-Killer: Modify PD and MIPI 12V configuration
+
+---
+ board/freescale/imx8mp_evk/imx8mp_evk.c | 20 ++++++++++++++++++--
+ 1 file changed, 18 insertions(+), 2 deletions(-)
+
+diff --git a/board/freescale/imx8mp_evk/imx8mp_evk.c b/board/freescale/imx8mp_evk/imx8mp_evk.c
+index c183dc9f4b..f0701b4a0e 100644
+--- a/board/freescale/imx8mp_evk/imx8mp_evk.c
++++ b/board/freescale/imx8mp_evk/imx8mp_evk.c
+@@ -195,7 +195,7 @@ struct tcpc_port_config port1_config = {
+ 	.max_snk_mw = 45000,
+ 	.op_snk_mv = 15000,
+ 	.switch_setup_func = &pd_switch_snk_enable,
+-	.disable_pd = true,
++//	.disable_pd = true,
+ };
+ 
+ struct tcpc_port_config port2_config = {
+@@ -265,7 +265,23 @@ static int setup_typec(void)
+ 		printf("%s: tcpc port1 init failed, err=%d\n",
+ 		       __func__, ret);
+ 	} else {
+-		return ret;
++        /* Enable PER 12V regulator */
++        printf("Wayne: Enable PER 12V regulator\n");
++        ret = dm_gpio_lookup_name("gpio@20_1", &per_12v_desc);
++        if (ret) {
++            printf("%s lookup gpio@20_1 failed ret = %d\n", __func__, ret);
++            return -ENODEV;
++        }
++
++        ret = dm_gpio_request(&per_12v_desc, "per_12v_en");
++
++        if (ret) {
++            printf("%s request per_12v failed ret = %d\n", __func__, ret);
++            return -EIO;
++        }
++
++        dm_gpio_set_dir_flags(&per_12v_desc, GPIOD_IS_OUT | GPIOD_IS_OUT_ACTIVE);
++        return ret;
+ 	}
+ 
+ 	return ret;

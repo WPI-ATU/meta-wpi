@@ -1,0 +1,34 @@
+From fe98209ea2908a8bd4f6682bdb3e078f2f51f0e8 Mon Sep 17 00:00:00 2001
+From: Jackson Wang <jackson.wang@wpi-group.com>
+Date: Wed, 3 May 2023 14:33:15 +0800
+Subject: [PATCH] WPI: OP-Killer: Add NXP Radio SAF4000 device tree
+
+---
+ arch/arm64/boot/dts/wpi/op-killer-saf4000.dts | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/wpi/op-killer-saf4000.dts
+
+diff --git a/arch/arm64/boot/dts/wpi/op-killer-saf4000.dts b/arch/arm64/boot/dts/wpi/op-killer-saf4000.dts
+new file mode 100644
+index 0000000000000..c06b8198e9e7e
+--- /dev/null
++++ b/arch/arm64/boot/dts/wpi/op-killer-saf4000.dts
+@@ -0,0 +1,18 @@
++// SPDX-License-Identifier: GPL-2.0+
++/*
++ * Copyright 2019,2021 NXP
++ */
++
++#include "op-killer.dts"
++
++&ecspi2 {
++	saf4000: spi@0 {
++		reg = <0>;
++		compatible = "nxp,saf4000";
++		spi-max-frequency = <500000>;
++		boot-gpios = <&pca9671_0 10 GPIO_ACTIVE_LOW>;
++		reset-gpios = <&pca9671_0 7 GPIO_ACTIVE_HIGH>;
++		titan_reset-gpios = <&pca9671_1 7 GPIO_ACTIVE_HIGH>;
++		status = "okay";
++	};
++};
