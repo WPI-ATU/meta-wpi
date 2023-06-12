@@ -1,77 +1,66 @@
-<h1>WPI i.MX Repo Manifest README</h1>
+<h1>WPI i.MX Linux Yocto Project BSP 5.15.71_2.2.0 Release</h1>
 
-<a>此資源庫是基於 [NXP i.MX Linux BSP Software](https://github.com/nxp-imx) 並加上 WPI 客製化 Layer 所建立而成，用於下載各種 WPI i.MX BSP 版本的 manifest。</a>
+---
 
-<a>各個分支都是根據 Linux 的版本去命名的，例如：``imx-linux-kirkstone`` 內的 manifest 都會跟 ``Kirkstone`` 版本相關，其他具體說明則會包含在分支內的 README</a>
+###### tags: `I/O` `MPU Model` `Author` `Status` 
 
-:::info
-<a>i.MX Linux Yocto Project 釋出的分支皆會以 ``imx-linux-`` 作為前綴詞</a>
-:::
+---
 
-## 安裝 ``repo`` 
+此資源庫是基於 [NXP i.MX Linux BSP Software \[meta-imx\]](https://github.com/nxp-imx/meta-imx) 建立而成，用於提供 WPI 客製化的 Yocto Layer。
 
-為了透過 manifest 去下載所有需要的資源，``repo`` 是必須安裝的。
+下方列表為 WPI 此次版本，已測試過的開發板。
 
-```!
-$ mkdir ~/bin
-$ curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-$ chmod a+x ~/bin/repo
-$ PATH=${PATH}:~/bin
-```
+* WPI OP-Killer (opkiller)
 
-## 下載 Yocto Project BSP
+## Quick Start Guide
 
-```!
-$ mkdir <release>
-$ cd <release>
-$ repo init -u https://github.com/nxp-imx/imx-manifest -b <branch name> [ -m <release manifest>]
-$ repo sync
-```
+請參考 [meta-imx](https://github.com/nxp-imx/meta-imx) 了解更多內容。
 
-各個分支內的 README 會包含相應的指令範例。
-
-## 範例
-
-下載 5.15.71-2.2.0 版本
+1. <a>安裝 WPI i.MX Linux BSP repo</a>
 
 ```!
 $ repo init -u https://github.com/WPI-ATU/wpi-manifest.git -b imx-linux-kirkstone -m imx-5.15.71-2.2.0.xml
 ```
 
-## 建立編譯環境
-
-這主要是說明建立環境編譯時的參數。
+2. 下載 <a>i.MX Yocto Layers</a>
 
 ```!
-$ [MACHINE=<machine>] [DISTRO=fsl-imx-<backend>] source ./imx-setup-release.sh -b bld-<backend>
-
-<machine>   defaults to `imx6qsabresd`
-<backend>   Graphics backend type
-    xwayland    Wayland with X11 support - default distro
-    wayland     Wayland
-    fb          Framebuffer (not supported for mx8)
+$ repo sync
 ```
 
-Example:
+* 如果 ``repo init`` 有問題，請移除 ``.repo`` 並重新執行 ``repo init``。
 
-* 建立 OP-Killer 編譯環境 (XWayland)
-
-```!
-$ DISTRO=fsl-imx-xwayland MACHINE=opkiller source imx-setup-release.sh -b build
-```
-
-## 建立映像檔
+3. 建立 <a>i.MX 的編譯環境</a>
 
 ```
-$ bitbake <image recipe>
+$ [MACHINE=<machine>] [DISTRO=fsl-imx-<backend>] source ./imx-setup-release.sh -b <build folder>
 ```
+
+* \<machine\> - 開發板名稱，OP-Killer 請設為 ``opkiller``
+* \<build folder\> - 建立的資料夾名稱
+
+## 建立 Images
 
 WPI 常用的映像檔選項
 
-| \<image recipe\> | 說明 |
+| \<image\> | 說明 |
 | - | - |
 | imx-image-core | 最基本的開機檔案 |
 | imx-image-multimedia | 具備 GUI 並包含多媒體工具 |
 | imx-image-full | 具備 GUI、多媒體工具、QT 及 Machine Learning 所需的函式庫 |
+
+### 建立 XWayland
+
+```!
+$ DISTRO=fsl-imx-xwayland MACHINE=opkiller source imx-setup-release.sh -b build-xwayland
+$ bitbake <image>
+```
+
+### 建立 Wayland-Weston (wayland)
+
+```!
+$ DISTRO=fsl-imx-wayland MACHINE=opkiller source imx-setup-release.sh -b build-wayland
+$ bitbake <image>
+```
 
 
