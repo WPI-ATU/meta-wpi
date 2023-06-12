@@ -4,7 +4,7 @@
 
 下方列表為 WPI 此次版本，已測試過的開發板。
 
-* WPI OP-Killer (opkiller)
+* [WPI OP-Killer](https://www.wpgdadatong.com/tw/solution/detail/36783) (opkiller)
 
 ## Quick Start Guide
 
