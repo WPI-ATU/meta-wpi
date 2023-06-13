@@ -6,9 +6,10 @@
 
 * [WPI OP-Killer](https://www.wpgdadatong.com/tw/solution/detail/36783) (opkiller)
 
-## Quick Start Guide
+若是想要編譯 NXP 的開發板亦可使用此 BSP，將下方 MACHINE 改設為 NXP 提供的參數即可，
+詳情請參考 [meta-imx](https://github.com/nxp-imx/meta-imx) 了解更多內容。
 
-請參考 [meta-imx](https://github.com/nxp-imx/meta-imx) 了解更多內容。
+## Quick Start Guide
 
 1. <a>安裝 WPI i.MX Linux BSP repo</a>
 
