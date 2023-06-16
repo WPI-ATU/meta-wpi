@@ -6,7 +6,29 @@
 
 * [WPI OP-Killer](https://www.wpgdadatong.com/tw/solution/detail/36783) (opkiller)
 
-若是想要編譯 NXP 的開發板亦可使用此 BSP，將下方 MACHINE 改設為 NXP 提供的參數即可，詳情請參考 [meta-imx](https://github.com/nxp-imx/meta-imx) 了解更多內容。
+若是想要編譯 NXP 的開發板亦可使用此 BSP，將 MACHINE 改設為下方 NXP 提供的參數即可。
+
+* NXP i.MX 93 EVK (imx93evk)
+* NXP i.MX 8MQuad EVK (imx8mqevk)
+* NXP i.MX 8MMini EVK (imx8mmevk)
+* NXP i.MX 8MNano EVK (imx8mnevk)
+* NXP i.MX 8MPlus EVK (imx8mpevk)
+* NXP i.MX 8QuadMax MEK (imx8qmmek)
+* NXP i.MX 8QuadXPlus MEK (imx8qxpc0mek)
+* NXP i.MX 8DXL EVK (imx8dxlevk)
+* NXP i.MX 8ULP EVK (imx8ulpevk)
+* NXP i.MX 7ULP EVK (imx7ulpevk)
+* NXP i.MX 7Dual SABRE Smart Device (imx7dsabresd)
+* NXP i.MX 6QuadPlus SABRE Device (imx6qpsabresd)
+* NXP i.MX 6Quad SABRE Smart Device (imx6qsabresd)
+* NXP i.MX 6DualLite SABRE Smart Device (imx6dlsabresd)
+* NXP i.MX 6SOLO SABRE Smart Device (imx6solosabresd )
+* NXP i.MX 6SoloX SABRE Smart Device (imx6sxsabresd)
+* NXP i.MX 6UltraLite EVK (imx6ulevk)
+* NXP i.MX 6ULL EVK (imx6ull14x14evk)
+* NXP i.MX 6ULZ EVK (imx6ulz14x14evk)
+
+詳情請參考 [meta-imx](https://github.com/nxp-imx/meta-imx) 了解更多內容。
 
 ## Quick Start Guide
 
